@@ -8,7 +8,7 @@ Serviço de criação de tarefas. CRUD das mesmas.
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ## Running the app
