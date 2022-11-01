@@ -3,7 +3,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Serviço de criação de tarefas. CRUD das mesmas.
 
 ## Installation
 
