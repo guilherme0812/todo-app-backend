@@ -1,8 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { IsNotEmpty, IsIn } from 'class-validator'
+import { IsNotEmpty, Length, IsIn } from 'class-validator'
 
 export class CreateTodoDto {
   @IsNotEmpty()
+  @Length(3, 10, { message: 'Nome precisa ter entre 3 e 10 caracteres' })
   @ApiProperty()
   task: string
   

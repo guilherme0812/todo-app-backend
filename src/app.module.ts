@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoModule } from './app/todo/todo.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { UserModule } from './app/user/user.module';
 import 'dotenv/config';
 
 @Module({
@@ -21,6 +22,7 @@ import 'dotenv/config';
       }),
     }),
     TodoModule,
+    UserModule,
   ],
   controllers: [],
   providers: [],
