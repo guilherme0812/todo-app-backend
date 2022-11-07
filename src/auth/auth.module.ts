@@ -6,6 +6,8 @@ import { UserModule } from 'src/app/user/user.module';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import 'dotenv/config';
+import { LocalStrategy } from './strategies/local.stratagy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -17,7 +19,7 @@ import 'dotenv/config';
       signOptions: { expiresIn: '60s' }
     }),
   ],
-  providers: [AuthService],
   controllers: [AuthController],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
