@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TodoModule } from './app/todo/todo.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './app/user/user.module';
+import { AuthModule } from './auth/auth.module';
 import 'dotenv/config';
 
 @Module({
@@ -23,6 +24,7 @@ import 'dotenv/config';
     }),
     TodoModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
