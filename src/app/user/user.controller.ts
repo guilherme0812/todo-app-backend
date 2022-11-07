@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Param, Delete, Put, Body, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Param, Delete, Put, Body, ParseUUIDPipe, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger'
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -11,26 +11,27 @@ export class UserController {
 
   @Get()
   async index() {
-    return this.userService.findAll()
+    return await this.userService.findAll()
   }
 
   @Post()
   async store(@Body() createUserDto:CreateUserDto) {
-    return this.userService.create(createUserDto)
+    return await this.userService.create(createUserDto)
   }
 
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
-    return this.userService.findOneOrFail({where: {id}})
+    return await this.userService.findOneOrFail({where: {id}})
   }
 
   @Put(':id')
   async update(@Param('id', new ParseUUIDPipe()) id: string, @Body() body: UpdateUserDto) {
-    return this.userService.update(id, body)
+    return await this.userService.update(id, body)
   }
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id', new ParseUUIDPipe()) id:string) {
-    return this.userService.delete(id)
+    return await this.userService.delete(id)
   }
 }
