@@ -13,13 +13,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport'
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 @UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 @ApiTags('Users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
