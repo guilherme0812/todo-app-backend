@@ -5,8 +5,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  ManyToOne
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger'
+import { UserEntity } from 'src/app/user/entities/user.entity';
 
 @Entity({ name: 'todos' })
 export class TodoEntity {
@@ -34,4 +36,7 @@ export class TodoEntity {
   @ApiProperty()
   deletedAt: string;
 
+
+  @ManyToOne(() => UserEntity, (user) => user.todos, { eager : true })
+  user: UserEntity
 }

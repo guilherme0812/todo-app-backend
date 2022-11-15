@@ -4,12 +4,15 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { FindOneOptions, Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm' 
 import { TodoEntity } from './entities/todo.entity';
+import { UserService } from 'src/app/user/user.service';
 
 @Injectable()
 export class TodoService {
   constructor(
     @InjectRepository(TodoEntity)
-    private readonly todoRepository: Repository<TodoEntity>
+    private readonly todoRepository: Repository<TodoEntity>,
+    
+    private readonly userService: UserService
   ) {}
   
   async create(data: CreateTodoDto) {

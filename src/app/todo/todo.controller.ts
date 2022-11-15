@@ -1,15 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseUUIDPipe, HttpStatus, HttpCode, UseGuards } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
-import { ApiTags, ApiOperation, ApiResponse} from '@nestjs/swagger'
+import { ApiBearerAuth, ApiTags, ApiOperation, ApiResponse} from '@nestjs/swagger'
 import { IndexTodoSwegger } from './swegger/index-todo.swegger';
 import { CreateTodoSwegger } from './swegger/create-todo.swegger';
 import { UpdateTodoSwegger } from './swegger/update-todo.swegger';
 import { ShowTodoSwegger } from './swegger/show-todo.swegger';
 import { BadRequestSweger } from 'src/utils/swegger/bad-request.swegger';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('todo')
+@UseGuards(AuthGuard('jwt'))
+@ApiBearerAuth()
 @ApiTags('todos')
 export class TodoController {
   constructor(private readonly todoService: TodoService) {}
