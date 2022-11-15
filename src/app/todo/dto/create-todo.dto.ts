@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger'
 import { IsNotEmpty, Length, IsIn } from 'class-validator'
+import { UserEntity } from 'src/app/user/entities/user.entity'
 
 export class CreateTodoDto {
   @IsNotEmpty()
@@ -11,4 +12,8 @@ export class CreateTodoDto {
   @ApiProperty({default: 1})
   @IsIn([0,1])
   isDone: number
+
+  @IsNotEmpty()
+  @ApiProperty()
+  userId: string
 }
