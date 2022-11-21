@@ -9,7 +9,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { hashSync } from 'bcrypt';
-import { TodoEntity } from 'src/app/todo/entities/todo.entity';
+import { TodoEntity } from '../../todo/entities/todo.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -43,5 +43,17 @@ export class UserEntity {
   @BeforeInsert()
   hashPassword() {
     this.password = hashSync(this.password, 10);
+  }
+
+  constructor(todo: Partial<UserEntity>) {
+    this.id = todo?.id
+    this.firstName = todo?.firstName
+    this.lastName = todo?.lastName
+    this.email = todo?.email
+    this.password = todo?.password
+    this.createAt = todo?.createAt
+    this.updateAt = todo?.updateAt
+    this.deleteAt = todo?.deleteAt
+    this.todos = todo?.todos
   }
 }

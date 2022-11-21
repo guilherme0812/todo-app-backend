@@ -19,12 +19,12 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
-@UseGuards(AuthGuard('jwt'))
 @ApiBearerAuth()
 @ApiTags('Users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService) { }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async index() {
     return await this.userService.findAll();
@@ -35,11 +35,13 @@ export class UserController {
     return await this.userService.create(createUserDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     return await this.userService.findOneOrFail({ where: { id } });
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   async update(
     @Param('id', new ParseUUIDPipe()) id: string,
@@ -48,6 +50,7 @@ export class UserController {
     return await this.userService.update(id, body);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async destroy(@Param('id', new ParseUUIDPipe()) id: string) {

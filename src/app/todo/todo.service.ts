@@ -4,7 +4,7 @@ import { UpdateTodoDto } from './dto/update-todo.dto';
 import { FindOneOptions, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TodoEntity } from './entities/todo.entity';
-import { UserService } from 'src/app/user/user.service';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class TodoService {
@@ -13,7 +13,7 @@ export class TodoService {
     private readonly todoRepository: Repository<TodoEntity>,
 
     private readonly userService: UserService,
-  ) {}
+  ) { }
 
   async findAll() {
     return await this.todoRepository.find();
@@ -30,7 +30,7 @@ export class TodoService {
   async create(data: CreateTodoDto) {
     const user = await this.userService.findOneOrFail({ where: { id: data.userId } });
 
-    if ( user ) {
+    if (user) {
       const todo = {
         task: data.task,
         isDone: data.isDone,
