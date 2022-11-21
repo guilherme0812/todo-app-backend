@@ -1,5 +1,4 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserModule } from '../user/user.module';
 import { TodoController } from './todo.controller';
 import { TodoService } from './todo.service';
 
